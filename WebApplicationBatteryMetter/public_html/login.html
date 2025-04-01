@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Meter Logowanie</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @font-face {
+            font-family: 'Barlow Semi Condensed Black';
+            src: url('fonts/Barlow-SemiCondensed-Black.ttf') format('truetype');
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Barlow Semi Condensed Black', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #fff;
+            background-color: #121212;
+            box-sizing: border-box;
+        }
+        .title-container {
+            text-align: center;
+            margin: 20px 0;
+            width: 100%;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+        h1 {
+            margin: 0;
+            text-align: center;
+            white-space: nowrap;
+        }
+        h2 {
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+        .password-container {
+            display: flex;
+            align-items: center;
+        }
+        .password-container img {
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .forgot-password, .register-link {
+            display: block;
+            margin-top: 10px;
+            color: #000;
+            text-align: right;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+    </style>
+    <script type="module" src="login.js" defer></script>
+</head>
+<body>
+    <div class="content-container">
+        <div class="title-container">
+            <h1 id="batteryTitle">BATTERY METER</h1>
+        </div>
+        <div class="login-container">
+            <form action="#" method="post">
+                <h2>Enter your login details:</h2>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" required>
+                        <img id="toggle-password" class="toggle-password" src="eyeClosed.png" alt="Toggle Password Visibility">
+                    </div>
+                </div>
+                <div id="error-message" class="error-message"></div>
+                <button id="submit" type="submit">Log in</button>
+            </form>
+            <a id="forgot-password" class="forgot-password">Forgot your password?</a>
+            <a id="register-link" class="register-link" href="registration.html">Don't have an account? Register here.</a>
+        </div>
+    </div>
+</body>
+</html>

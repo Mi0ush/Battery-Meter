@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Battery Meter</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Barlow Semi Condensed Black', sans-serif;
+            color: #fff;
+            background-color: #121212;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+        .title-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .title-container h1 {
+            font-size: 40px; /* Adjust the font size as needed */
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: auto;
+        }
+        .measurement-list {
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 80%;
+            max-width: 600px;
+            color: #000;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .measurement-info {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-container">
+        <h1 id="welcomeTitle">Welcome to Battery Meter</h1>
+    </div>
+    <div class="button-container">
+        <button class="button" id="historyButton">View Measurement History</button>
+    </div>
+    <button class="logout-button" id="logoutButton">Logout</button>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: " ",
+            authDomain: "batterymetter-7ef13.firebaseapp.com",
+            projectId: "batterymetter-7ef13",
+            storageBucket: "batterymetter-7ef13.appspot.com",
+            messagingSenderId: "1074084787551",
+            appId: "1:1074084787551:web:f9314b9100e302ad88f2ea",
+            measurementId: "G-K1ZRY8RTHN"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        async function fetchMeasurements() {
+            const user = auth.currentUser;
+            if (!user) {
+                console.error('No user logged in');
+                return;
+            }
+
+            const measurementsList = document.getElementById('measurements');
+            measurementsList.innerHTML = '';
+
+            try {
+                const measurementsSnapshot = await getDocs(query(
+                    collection(db, `users/${user.uid}/measurements`),
+                    orderBy('timestamp', 'desc')
+                ));
+                measurementsSnapshot.forEach((doc) => {
+                    const measurement = doc.data();
+                    const li = document.createElement('li');
+                    li.className = 'measurement';
+                    li.innerHTML = `
+                        <div class="measurement-info">
+                        <strong>Model: </strong> ${measurement.phoneModel}<br> 
+                        <strong>OS: </strong>  ${measurement.androidVersion}<br> 
+                        <strong>Application: </strong> ${measurement.appName}<br>
+                        <strong>Measurement Date: </strong> ${new Date(measurement.timestamp).toISOString()}<br>
+                        </div>
+                    `;
+                    measurementsList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error fetching measurements:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await fetchMeasurements();
+        });
+
+        document.getElementById('historyButton').addEventListener('click', () => {
+            window.location.href = 'history.html';
+        });
+
+        document.getElementById('logoutButton').addEventListener('click', async () => {
+            await signOut(auth);
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+/* Zmienne kolorów */
+:root {
+    --color-dark: #ff750b;
+    --color-light: #803a05;
+}
+
+/* Resetowanie marginesu i paddingu dla całego dokumentu */
+body {
+    margin: 0;
+    padding: 0;
+    /* Ustawienie wysokości całego okna przeglądarki */
+    height: 100vh;
+    /* Wyśrodkowanie elementów w pionie i poziomie */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Ustawienie pomarańczowego tła dla strony */
+    background: linear-gradient(to right, var(--color-light), var(--color-dark));
+}
+
+/* Styl kontenera formularza logowania */
+.login-container {
+    /* tło kontenera */
+    background: #b17200; /* zmiana koloru tła */
+    margin-top: 20px;
+    padding: 20px; /* dodanie paddingu dla lepszego wyglądu */
+    border-radius: 10px; /* zaokrąglenie rogów */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* dodanie cienia */
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+/* Styl inputów typu tekst i hasło */
+input[type="text"],
+input[type="password"] {
+    /* Pełna szerokość */
+    width: 100%;
+    /* Wewnętrzny padding */
+    padding: 10px;
+    /* Mniejszy margines na górze i dołu */
+    margin: 10px 0;
+    /* Ramka z cieniem */
+    border: 1px solid #000;
+    /* Zaokrąglenie rogów */
+    border-radius: 5px;
+    /* Ustawienie pudełka modelu */
+    box-sizing: border-box;
+    background-color: #E0E0E0;
+}
+
+/* Styl przycisku logowania */
+button {
+    /* Pełna szerokość */
+    width: 100%;
+    /* Wewnętrzny padding */
+    padding: 15px;
+    /* Mniejszy margines na górze i dołu */
+    margin: 15px 0;
+    /* Brak obramowania */
+    border: none;
+    /* Zaokrąglenie rogów */
+    border-radius: 5px;
+    /* Kolor tła */
+    background-color: black;
+    /* Kolor tekstu */
+    color: white;
+    /* Kursor wskazujący na możliwość interakcji */
+    cursor: pointer;
+    /* Efekt przejścia przy najechaniu myszką */
+    transition: background-color 0.3s ease;
+    /* Dodanie rozmiaru czcionki */
+    font-size: 16px; 
+    /* Dodanie stylu czcionki */
+    font-weight: bold; 
+}
+
+/* Styl przycisku po najechaniu myszką */
+button:hover {
+    /* Głębszy odcień niebieskiego */
+    background-color: #ffa500;
+}
+
+/* Wyśrodkowanie nagłówka */
+h1#batteryTitle {
+    text-align: center;
+    font-family: 'Barlow Semi Condensed Black', Arial, sans-serif;
+    font-size: 90px; /* Zwiększenie rozmiaru czcionki */
+    font-style: italic;
+    font-weight: bold;
+    color: white;
+}
+
+/* Wyśrodkowanie tytułu logowania */
+h2 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 36px; /* Zwiększenie rozmiaru czcionki */
+    font-weight: bold; /* Dodanie stylu czcionki */
+    color: #000; /* Dodanie koloru tekstu */
+    margin-top: 40px; /* Dodanie marginesu na górę */
+}
+
+/* Styl labeli dla adresu e-mail i hasła */
+label {
+    font-family: Arial, sans-serif;
+    font-size: 15px; /* Zmiana rozmiaru czcionki */
+    font-weight: bold; /* Dodanie stylu czcionki */
+    color: #000; /* Zmiana koloru tekstu */
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    flex: 1;
+}
+
+.toggle-password {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px; /* dostosuj rozmiar obrazka w razie potrzeby */
+    height: 24px;
+}
